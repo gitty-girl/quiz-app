@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+
 import styles from "./Result.module.css";
 
 const Result = ({ score }) => {
@@ -7,10 +8,11 @@ const Result = ({ score }) => {
   const handleRetake = () => {
     history.push("/");
   };
+
   return (
     <div className={styles.wrapper}>
       <h1>Final Score: {score}</h1>
-      <button onClick={handleRetake}>Retake Quiz</button>
+      <button onClick={handleRetake}>Take another Quiz</button>
     </div>
   );
 };

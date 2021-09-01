@@ -21,29 +21,35 @@ const Question = ({
 
   const history = useHistory();
 
-  const handleSelect = (i) => {
-    console.log(i);
-    if (selected === i && selected === correct) {
+  const isLastQuestion = currentQuestionID >= questions.length - 1;
+
+  const handleSelect = (answer) => {
+    if (answer === correct) {
       return "correct";
-    } else if (selected === i && selected !== correct) {
+    }
+
+    if (answer === selected && answer !== correct) {
       return "wrong";
-    } else if (i === correct) {
-      return "correct";
     }
   };
 
-  const handleCheck = (i) => {
-    console.log("in handleCheck", i);
-    setSelected(i);
-    if (i === correct) setScore((prev) => prev + 1);
+  const handleCheck = (answer) => {
     setError(false);
+    setSelected(answer);
+
+    if (answer === correct) {
+      setScore((prev) => prev + 1);
+    }
   };
 
   const handleNext = () => {
-    if (currentQuestionID > 8) {
+    if (isLastQuestion) {
       history.push("./result");
-    } else if (selected) {
-      setCurrentQuestionID(currentQuestionID + 1);
+      return;
+    }
+
+    if (selected) {
+      setCurrentQuestionID((prev) => prev + 1);
       setSelected();
     } else {
       setError("Please, select the option to continue...");
@@ -51,6 +57,7 @@ const Question = ({
   };
 
   const handleQuit = () => {
+    // TODO: add confirmation question to avoid accidental clicks
     setCurrentQuestionID(0);
     setQuestions([]);
     setScore(0);
@@ -68,12 +75,7 @@ const Question = ({
         <div className={styles.options}>
           {error && <ErrorMessage>{error}</ErrorMessage>}
 
-          {console.log({ options })}
-          {console.log({ correct })}
-          {console.log({ selected })}
-          {console.log(correct === selected)}
-
-          {options &&
+          {!!options &&
             options.map((option) => (
               <button
                 key={option}

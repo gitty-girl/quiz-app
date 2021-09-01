@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { DIFFICULTIES } from "../../constants/";
-import { getCategories } from "../../api";
-import { ErrorMessage } from "../../components";
-
 import {
   CircularProgress,
   FormControl,
@@ -13,9 +9,13 @@ import {
   Button,
 } from "@material-ui/core";
 
-import styles from "./Settings.module.css";
+import { DIFFICULTIES } from "../../constants";
+import { getCategories } from "../../api";
+import { ErrorMessage } from "../../components";
 
-const Settings = ({
+import styles from "./Home.module.css";
+
+const Home = ({
   selectedCategory,
   setSelectedCategory,
   selectedDifficulty,
@@ -36,20 +36,20 @@ const Settings = ({
   }, []);
 
   const handleSubmit = () => {
-    console.log({ selectedCategory, selectedDifficulty });
     if (!selectedCategory || !selectedDifficulty) {
       setError(true);
-      return;
     } else {
       history.push("/quiz");
     }
   };
 
+  if (loading) {
+    return <CircularProgress variant="determinate" value={100} />;
+  }
+
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Quiz Settings</h1>
-
-      {loading && <CircularProgress variant="determinate" value={100} />}
 
       {error && (
         <ErrorMessage>Please, fill all the fields to continue...</ErrorMessage>
@@ -113,4 +113,4 @@ const Settings = ({
   );
 };
 
-export default Settings;
+export default Home;

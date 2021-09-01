@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { ROUTES } from "./config/routes";
 
-import { Settings, Result, Quiz, NotFound } from "./pages";
+import { Home, Result, Quiz, NotFound } from "./pages";
 
 const Routes = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -14,8 +14,8 @@ const Routes = () => {
 
   return (
     <Switch>
-      <Route path={ROUTES.SETTINGS} exact>
-        <Settings
+      <Route path={ROUTES.HOME} exact>
+        <Home
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
           selectedDifficulty={selectedDifficulty}

@@ -1,5 +1,5 @@
 const ROUTES = {
-  SETTINGS: "/",
+  HOME: "/",
   QUIZ: "/quiz",
   RESULT: "/result",
   NOT_FOUND: "/not-found",

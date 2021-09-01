@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+
+import { shuffleAnswers } from "../../helpers";
 import { getQuestions } from "../../api";
 
-import handleShuffle from "../../helpers";
-
-import { Question } from "../../components";
+import { ErrorMessage, Question } from "../../components";
 
 import styles from "./Quiz.module.css";
 
@@ -17,8 +17,9 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const currentQuestion = questions[currentQuestionID] || {};
+
   useEffect(() => {
-    console.log(selectedCategory, selectedDifficulty);
     getQuestions(selectedCategory, selectedDifficulty)
       .then((data) => setQuestions(data))
       .catch((error) => setError(error.message))
@@ -27,24 +28,29 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
 
   useEffect(() => {
     if (questions.length > 0) {
-      const shuffledOptions = handleShuffle([
-        questions[currentQuestionID]?.correct_answer,
-        ...questions[currentQuestionID]?.incorrect_answers,
+      const { correct_answer, incorrect_answers } = currentQuestion;
+
+      const shuffledAnswers = shuffleAnswers([
+        correct_answer,
+        ...incorrect_answers,
       ]);
 
-      setOptions(shuffledOptions);
+      setOptions(shuffledAnswers);
     }
   }, [questions, currentQuestionID]);
+
+  if (loading) {
+    return <h1>loading...</h1>;
+  }
 
   return (
     <div className={styles.wrapper}>
       Questions Page
-      {error && <h1>{error}</h1>}
-      {questions.length > 0 ? (
+      {error && <ErrorMessage>Choose option</ErrorMessage>}
+      {questions.length > 0 && (
         <div>
           <div className={styles.quizInfo}>
-            <span>Category: {questions[currentQuestionID].category}</span>
-            {console.log(questions[currentQuestionID].category)}
+            <span>Category: {currentQuestion.category}</span>
             <span> Score: {score} </span>
           </div>
 
@@ -56,11 +62,9 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
             currentQuestionID={currentQuestionID}
             setCurrentQuestionID={setCurrentQuestionID}
             options={options}
-            correct={questions[currentQuestionID]?.correct_answer}
+            correct={currentQuestion.correct_answer}
           />
         </div>
-      ) : (
-        <div>LOading</div>
       )}
     </div>
   );
