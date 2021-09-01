@@ -36,6 +36,10 @@ const Routes = () => {
         <Result score={score} />
       </Route>
 
+      <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+
+      <Route render={() => <Redirect to="/not-found" />} />
+
       <Route
         render={() => (
           <Redirect to={ROUTES.NOT_FOUND}>

@@ -78,7 +78,7 @@ const Question = ({
               <button
                 key={option}
                 disabled={selected}
-                className={`styles.option ${selected && handleSelect(option)}`}
+                className={`option ${selected && handleSelect(option)}`}
                 onClick={() => handleCheck(option)}
               >
                 {option}
