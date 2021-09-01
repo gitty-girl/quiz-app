@@ -12,6 +12,7 @@ import styles from "./Quiz.module.css";
 
 const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   const [questions, setQuestions] = useState([]);
+  const [questionsNotAvailable, setQuestionsNotAvailable] = useState(false);
 
   const [currentQuestionID, setCurrentQuestionID] = useState(0);
 
@@ -26,7 +27,13 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
 
   useEffect(() => {
     getQuestions(selectedCategory, selectedDifficulty)
-      .then((data) => setQuestions(data))
+      .then((data) => {
+        if (data.length === 0) {
+          setQuestionsNotAvailable(true);
+          return;
+        }
+        setQuestions(data);
+      })
       .catch((error) => setError(error.message))
       .finally(setLoading(false));
   }, [selectedCategory, selectedDifficulty]);
@@ -51,6 +58,8 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>;
   }
+
+  if (questionsNotAvailable) return <QuestionNotAvailable />;
 
   return (
     <div className={styles.wrapper}>
