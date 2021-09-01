@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Button } from "@material-ui/core";
 
 import styles from "./QuitConfirmationModal.module.css";
@@ -33,4 +35,8 @@ function QuitConfirmationModal({ toggleModal, handleQuit }) {
   );
 }
 
+QuitConfirmationModal.propTypes = {
+  toggleModal: PropTypes.func,
+  handleQuit: PropTypes.func,
+};
 export default QuitConfirmationModal;

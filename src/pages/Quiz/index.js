@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
+import PropTypes from "prop-types";
 
 import { CircularProgress } from "@material-ui/core";
 
@@ -23,8 +24,6 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
     return questions[currentQuestionID] || {};
   }, [questions, currentQuestionID]);
 
-  // const currentQuestion = questions[currentQuestionID] || {};
-
   useEffect(() => {
     getQuestions(selectedCategory, selectedDifficulty)
       .then((data) => setQuestions(data))
@@ -42,8 +41,6 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
       ]);
 
       setOptions(shuffledAnswers);
-    } else {
-      console.log("something should be added");
     }
   }, [questions, currentQuestionID, currentQuestion]);
 
@@ -54,8 +51,6 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>;
   }
-
-  // if (questions.length <= 0) return <QuestionNotAvailable />;
 
   return (
     <div className={styles.wrapper}>
@@ -73,6 +68,13 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
       )}
     </div>
   );
+};
+
+Quiz.propTypes = {
+  selectedCategory: PropTypes.string.isRequired,
+  selectedDifficulty: PropTypes.string.isRequired,
+  score: PropTypes.number,
+  setScore: PropTypes.func,
 };
 
 export default Quiz;

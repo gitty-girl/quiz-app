@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
+import PropTypes from "prop-types";
 
 import { Button } from "@material-ui/core";
 
@@ -126,6 +127,17 @@ const Question = ({
       </div>
     </div>
   );
+};
+
+Question.propTypes = {
+  questions: PropTypes.array,
+  options: PropTypes.array,
+  correct: PropTypes.string,
+  currentQuestionID: PropTypes.number,
+  score: PropTypes.number,
+  setScore: PropTypes.func,
+  setQuestions: PropTypes.func,
+  setCurrentQuestionID: PropTypes.func,
 };
 
 export default Question;

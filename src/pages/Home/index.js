@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import {
   CircularProgress,
@@ -113,6 +114,13 @@ const Home = ({
       </Button>
     </section>
   );
+};
+
+Home.propTypes = {
+  selectedCategory: PropTypes.string.isRequired,
+  selectedDifficulty: PropTypes.string.isRequired,
+  setSelectedCategory: PropTypes.func,
+  setSelectedDifficulty: PropTypes.func,
 };
 
 export default Home;

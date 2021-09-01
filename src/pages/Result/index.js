@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { Button } from "@material-ui/core";
 
@@ -26,6 +27,11 @@ const Result = ({ score, setScore }) => {
       </Button>
     </div>
   );
+};
+
+Result.propTypes = {
+  score: PropTypes.number,
+  setScore: PropTypes.func,
 };
 
 export default Result;
