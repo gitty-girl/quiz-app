@@ -34,7 +34,7 @@ const Routes = () => {
         </Route>
 
         <Route path={ROUTES.RESULT}>
-          <Result score={score} />
+          <Result score={score} setScore={setScore} />
         </Route>
 
         <Route path={ROUTES.NOT_FOUND} component={NotFound} />

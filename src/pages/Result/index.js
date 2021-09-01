@@ -4,10 +4,11 @@ import { Button } from "@material-ui/core";
 
 import styles from "./Result.module.css";
 
-const Result = ({ score }) => {
+const Result = ({ score, setScore }) => {
   const history = useHistory();
 
   const handleRetake = () => {
+    setScore(0);
     history.push("/");
   };
 
