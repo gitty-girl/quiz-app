@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import { CircularProgress } from "@material-ui/core";
 
@@ -8,12 +8,6 @@ import { getQuestions } from "../../api";
 import { ErrorMessage, Question, QuestionNotAvailable } from "../../components";
 
 import styles from "./Quiz.module.css";
-
-const entities = {
-  "&#039;": "'",
-  "&quot;": '"',
-  // add more if needed
-};
 
 const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   const [questions, setQuestions] = useState([]);
@@ -25,7 +19,11 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const currentQuestion = questions[currentQuestionID] || {};
+  const currentQuestion = useMemo(() => {
+    return questions[currentQuestionID] || {};
+  }, [questions, currentQuestionID]);
+
+  // const currentQuestion = questions[currentQuestionID] || {};
 
   useEffect(() => {
     getQuestions(selectedCategory, selectedDifficulty)
@@ -47,7 +45,7 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
     } else {
       console.log("something should be added");
     }
-  }, [questions, currentQuestionID]);
+  }, [questions, currentQuestionID, currentQuestion]);
 
   if (loading) {
     return <CircularProgress color="secondary" className="spinner" size={50} />;
