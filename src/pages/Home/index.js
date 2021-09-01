@@ -60,10 +60,11 @@ const Home = ({
         <Select
           native
           onChange={(e) => setSelectedCategory(e.target.value)}
-          label="Select Category"
+          label="Category"
           inputProps={{
             name: "category",
             id: "outlined-catgegory-native-simple",
+            style: { textTransform: "capitalize" },
           }}
         >
           <option aria-label="None" value="" />
@@ -87,6 +88,7 @@ const Home = ({
           inputProps={{
             name: "difficulty",
             id: "outlined-difficulty-native-simple",
+            style: { textTransform: "capitalize" },
           }}
           className={styles.select}
         >
