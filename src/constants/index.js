@@ -4,4 +4,10 @@ const DIFFICULTIES = [
   { id: 3, name: "hard" },
 ];
 
-export { DIFFICULTIES };
+const ENTITIES = {
+  "&#039;": "'",
+  "&quot;": '"',
+  // add more if needed
+};
+
+export { DIFFICULTIES, ENTITIES };

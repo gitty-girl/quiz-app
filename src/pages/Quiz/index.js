@@ -5,9 +5,15 @@ import { CircularProgress } from "@material-ui/core";
 import { shuffleAnswers } from "../../helpers";
 import { getQuestions } from "../../api";
 
-import { Question, QuestionNotAvailable } from "../../components";
+import { ErrorMessage, Question, QuestionNotAvailable } from "../../components";
 
 import styles from "./Quiz.module.css";
+
+const entities = {
+  "&#039;": "'",
+  "&quot;": '"',
+  // add more if needed
+};
 
 const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   const [questions, setQuestions] = useState([]);
@@ -38,12 +44,20 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
       ]);
 
       setOptions(shuffledAnswers);
+    } else {
+      console.log("something should be added");
     }
   }, [questions, currentQuestionID]);
 
   if (loading) {
     return <CircularProgress color="secondary" className="spinner" size={50} />;
   }
+
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>;
+  }
+
+  // if (questions.length <= 0) return <QuestionNotAvailable />;
 
   return (
     <div className={styles.wrapper}>
@@ -59,8 +73,6 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
           correct={currentQuestion.correct_answer}
         />
       )}
-
-      {questions.length <= 0 && <QuestionNotAvailable />}
     </div>
   );
 };

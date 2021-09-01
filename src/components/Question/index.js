@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 
 import { Button } from "@material-ui/core";
 
+import { ENTITIES } from "../../constants";
 import ErrorMessage from "../ErrorMessage";
 import { Modal, QuitConfirmationModal } from "../../components";
 
@@ -68,6 +69,11 @@ const Question = ({
     history.push("/");
   };
 
+  const question = questions[currentQuestionID].question.replace(
+    /&#?\w+;/g,
+    (match) => ENTITIES[match]
+  );
+
   return (
     <div className={styles.questionWrapper}>
       <h1 className={styles.title}>Question #{currentQuestionID + 1}</h1>
@@ -78,11 +84,10 @@ const Question = ({
       </div>
 
       <div>
-        <h2 className={styles.question}>
-          {questions[currentQuestionID].question}
-        </h2>
+        <h2 className={styles.question}>{question}</h2>
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
+
         <div className={styles.options}>
           {!!options &&
             options.map((option) => (
@@ -92,7 +97,7 @@ const Question = ({
                 className={`option ${selected && handleSelect(option)}`}
                 onClick={() => handleCheck(option)}
               >
-                {option}
+                {option.replace(/&#?\w+;/g, (match) => ENTITIES[match])}
               </button>
             ))}
         </div>
