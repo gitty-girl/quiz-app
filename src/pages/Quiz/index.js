@@ -7,7 +7,7 @@ import { Question } from "../../components";
 
 import styles from "./Quiz.module.css";
 
-function Quiz({ selectedCategory, selectedDifficulty, score, setScore }) {
+const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   const [questions, setQuestions] = useState([]);
 
   const [currentQuestionID, setCurrentQuestionID] = useState(0);
@@ -64,6 +64,6 @@ function Quiz({ selectedCategory, selectedDifficulty, score, setScore }) {
       )}
     </div>
   );
-}
+};
 
 export default Quiz;

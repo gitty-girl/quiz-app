@@ -7,12 +7,12 @@ import { ErrorMessage } from "../../components";
 
 import styles from "./Settings.module.css";
 
-function Settings({
+const Settings = ({
   selectedCategory,
   setSelectedCategory,
   selectedDifficulty,
   setSelectedDifficulty,
-}) {
+}) => {
   const [categories, setCategories] = useState([]);
 
   const [error, setError] = useState(false);
@@ -64,6 +64,6 @@ function Settings({
       <button onClick={handleSubmit}>Start Quiz</button>
     </div>
   );
-}
+};
 
 export default Settings;

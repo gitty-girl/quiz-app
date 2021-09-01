@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import styles from "./Result.module.css";
 
-function Result({ score }) {
+const Result = ({ score }) => {
   const history = useHistory();
 
   const handleRetake = () => {
@@ -13,6 +13,6 @@ function Result({ score }) {
       <button onClick={handleRetake}>Retake Quiz</button>
     </div>
   );
-}
+};
 
 export default Result;

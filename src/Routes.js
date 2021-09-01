@@ -6,7 +6,7 @@ import { ROUTES } from "./config/routes";
 
 import { Settings, Result, Quiz, NotFound } from "./pages";
 
-function Routes() {
+const Routes = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
@@ -45,6 +45,6 @@ function Routes() {
       />
     </Switch>
   );
-}
+};
 
 export default Routes;

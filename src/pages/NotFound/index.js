@@ -1,7 +1,7 @@
 import styles from "./NotFound.module.css";
 
-function NotFound() {
+const NotFound = () => {
   return <div className={styles.wrapper}>NotFound PAge</div>;
-}
+};
 
 export default NotFound;
