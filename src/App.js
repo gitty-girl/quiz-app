@@ -1,5 +1,7 @@
+import Routes from "./Routes";
+
 function App() {
-  return <div>Hello World</div>;
+  return <Routes />;
 }
 
 export default App;
