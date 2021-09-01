@@ -24,7 +24,7 @@ const Home = ({
   const [categories, setCategories] = useState([]);
 
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -44,7 +44,7 @@ const Home = ({
   };
 
   if (loading) {
-    return <CircularProgress variant="determinate" value={100} />;
+    return <CircularProgress color="secondary" className="spinner" size={50} />;
   }
 
   return (

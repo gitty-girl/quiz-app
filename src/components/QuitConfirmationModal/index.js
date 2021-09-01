@@ -1,8 +1,8 @@
 import { Button } from "@material-ui/core";
 
-import styles from "./DeleteConfirmationModal.module.css";
+import styles from "./QuitConfirmationModal.module.css";
 
-function DeleteConfirmationModal({ toggleModal, handleQuit }) {
+function QuitConfirmationModal({ toggleModal, handleQuit }) {
   return (
     <div className={styles.modalBody}>
       <div className={styles.messageWrapper}>
@@ -33,4 +33,4 @@ function DeleteConfirmationModal({ toggleModal, handleQuit }) {
   );
 }
 
-export default DeleteConfirmationModal;
+export default QuitConfirmationModal;

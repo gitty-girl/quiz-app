@@ -1,12 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
 
 :root {
-  /* --main-color: #eec20a; */
   --bg-color: #d3d3d3;
-
   --main-color: tomato;
-
-  /* --main-color: #6f9283; */
   --secondary-color: #f0dcca;
   --accent-color: #f44336;
 }
@@ -36,7 +32,7 @@ code {
 
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
   height: 100vh;
@@ -73,4 +69,8 @@ code {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.spinner {
+  z-index: 100;
 }

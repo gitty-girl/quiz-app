@@ -42,13 +42,7 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   }, [questions, currentQuestionID]);
 
   if (loading) {
-    return (
-      <CircularProgress
-        variant="determinate"
-        value={100}
-        className={styles.spinner}
-      />
-    );
+    return <CircularProgress color="secondary" className="spinner" size={50} />;
   }
 
   return (

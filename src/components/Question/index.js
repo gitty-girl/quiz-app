@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { Button } from "@material-ui/core";
 
 import ErrorMessage from "../ErrorMessage";
-import { Modal, DeleteConfirmationModal } from "../../components";
+import { Modal, QuitConfirmationModal } from "../../components";
 
 import styles from "./Question.module.css";
 
@@ -61,7 +61,6 @@ const Question = ({
   };
 
   const handleQuit = () => {
-    // TODO: add confirmation question to avoid accidental clicks
     setCurrentQuestionID(0);
     setQuestions([]);
     setScore(0);
@@ -74,8 +73,8 @@ const Question = ({
       <h1 className={styles.title}>Question #{currentQuestionID + 1}</h1>
 
       <div className={styles.quizInfo}>
-        <span>Category: {questions[currentQuestionID].category}</span>
-        <span>Score: {score} </span>
+        <span>Category - {questions[currentQuestionID].category}</span>
+        <span>Score - {score} </span>
       </div>
 
       <div>
@@ -112,7 +111,7 @@ const Question = ({
 
           {showModal && (
             <Modal>
-              <DeleteConfirmationModal
+              <QuitConfirmationModal
                 toggleModal={toggleModal}
                 handleQuit={handleQuit}
               />
