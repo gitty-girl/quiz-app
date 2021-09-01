@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem 4rem;
+  background: white;
+  border-radius: 2rem;
+}
+
+.message {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  /* color: Var(--accent-color); */
+}

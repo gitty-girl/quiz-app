@@ -5,7 +5,7 @@ import { CircularProgress } from "@material-ui/core";
 import { shuffleAnswers } from "../../helpers";
 import { getQuestions } from "../../api";
 
-import { ErrorMessage, Question } from "../../components";
+import { Question, QuestionNotAvailable } from "../../components";
 
 import styles from "./Quiz.module.css";
 
@@ -59,6 +59,8 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
           correct={currentQuestion.correct_answer}
         />
       )}
+
+      {questions.length <= 0 && <QuestionNotAvailable />}
     </div>
   );
 };
