@@ -55,11 +55,10 @@ const Home = ({
         <ErrorMessage>Please, fill all the fields to continue...</ErrorMessage>
       )}
 
-      <FormControl variant="outlined" className={styles.select}>
+      <FormControl variant="outlined" className={styles.selectWrapper}>
         <InputLabel htmlFor="outlined-age-native-simple">Category</InputLabel>
         <Select
           native
-          // value={state.age}
           onChange={(e) => setSelectedCategory(e.target.value)}
           label="Select Category"
           inputProps={{
@@ -77,7 +76,7 @@ const Home = ({
         </Select>
       </FormControl>
 
-      <FormControl variant="outlined" className={styles.select}>
+      <FormControl variant="outlined" className={styles.selectWrapper}>
         <InputLabel htmlFor="outlined-difficulty-native-simple">
           Difficulty
         </InputLabel>
@@ -89,6 +88,7 @@ const Home = ({
             name: "difficulty",
             id: "outlined-difficulty-native-simple",
           }}
+          className={styles.select}
         >
           <option aria-label="None" value="" />
 

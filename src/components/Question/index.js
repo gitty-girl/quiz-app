@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 
+import { Button } from "@material-ui/core";
+
 import ErrorMessage from "../ErrorMessage";
+import { Modal, DeleteConfirmationModal } from "../../components";
 
 import styles from "./Question.module.css";
 
@@ -18,6 +21,7 @@ const Question = ({
   const [error, setError] = useState(false);
 
   const [selected, setSelected] = useState();
+  const [showModal, toggleModal] = useState(false);
 
   const history = useHistory();
 
@@ -66,15 +70,21 @@ const Question = ({
   };
 
   return (
-    <div className={styles.question}>
-      <h1>Question #{currentQuestionID + 1}</h1>
+    <div className={styles.questionWrapper}>
+      <h1 className={styles.title}>Question #{currentQuestionID + 1}</h1>
+
+      <div className={styles.quizInfo}>
+        <span>Category: {questions[currentQuestionID].category}</span>
+        <span>Score: {score} </span>
+      </div>
 
       <div>
-        <h2>{questions[currentQuestionID].question}</h2>
+        <h2 className={styles.question}>
+          {questions[currentQuestionID].question}
+        </h2>
 
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <div className={styles.options}>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-
           {!!options &&
             options.map((option) => (
               <button
@@ -89,8 +99,25 @@ const Question = ({
         </div>
 
         <div className={styles.controls}>
-          <button onClick={handleQuit}>Quit</button>
-          <button onClick={handleNext}>Next</button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => toggleModal(true)}
+          >
+            Quit
+          </Button>
+          <Button variant="contained" color="primary" onClick={handleNext}>
+            {isLastQuestion ? "Submit" : "Next"}
+          </Button>
+
+          {showModal && (
+            <Modal>
+              <DeleteConfirmationModal
+                toggleModal={toggleModal}
+                handleQuit={handleQuit}
+              />
+            </Modal>
+          )}
         </div>
       </div>
     </div>

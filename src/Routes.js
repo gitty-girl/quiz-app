@@ -13,41 +13,43 @@ const Routes = () => {
   const [score, setScore] = useState(0);
 
   return (
-    <Switch>
-      <Route path={ROUTES.HOME} exact>
-        <Home
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedDifficulty={selectedDifficulty}
-          setSelectedDifficulty={setSelectedDifficulty}
+    <div className="container">
+      <Switch>
+        <Route path={ROUTES.HOME} exact>
+          <Home
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            selectedDifficulty={selectedDifficulty}
+            setSelectedDifficulty={setSelectedDifficulty}
+          />
+        </Route>
+
+        <Route path={ROUTES.QUIZ}>
+          <Quiz
+            selectedCategory={selectedCategory}
+            selectedDifficulty={selectedDifficulty}
+            score={score}
+            setScore={setScore}
+          />
+        </Route>
+
+        <Route path={ROUTES.RESULT}>
+          <Result score={score} />
+        </Route>
+
+        <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+
+        <Route render={() => <Redirect to="/not-found" />} />
+
+        <Route
+          render={() => (
+            <Redirect to={ROUTES.NOT_FOUND}>
+              <NotFound />
+            </Redirect>
+          )}
         />
-      </Route>
-
-      <Route path={ROUTES.QUIZ}>
-        <Quiz
-          selectedCategory={selectedCategory}
-          selectedDifficulty={selectedDifficulty}
-          score={score}
-          setScore={setScore}
-        />
-      </Route>
-
-      <Route path={ROUTES.RESULT}>
-        <Result score={score} />
-      </Route>
-
-      <Route path={ROUTES.NOT_FOUND} component={NotFound} />
-
-      <Route render={() => <Redirect to="/not-found" />} />
-
-      <Route
-        render={() => (
-          <Redirect to={ROUTES.NOT_FOUND}>
-            <NotFound />
-          </Redirect>
-        )}
-      />
-    </Switch>
+      </Switch>
+    </div>
   );
 };
 

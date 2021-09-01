@@ -1,5 +1,7 @@
 import { useHistory } from "react-router-dom";
 
+import { Button } from "@material-ui/core";
+
 import styles from "./Result.module.css";
 
 const Result = ({ score }) => {
@@ -10,9 +12,17 @@ const Result = ({ score }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h1>Final Score: {score}</h1>
-      <button onClick={handleRetake}>Take another Quiz</button>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Final Score: {score}</h1>
+      <Button
+        variant="contained"
+        size="large"
+        color="primary"
+        disableElevation
+        onClick={handleRetake}
+      >
+        Take another Quiz
+      </Button>
     </div>
   );
 };

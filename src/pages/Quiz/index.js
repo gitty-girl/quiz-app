@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { CircularProgress } from "@material-ui/core";
+
 import { shuffleAnswers } from "../../helpers";
 import { getQuestions } from "../../api";
 
@@ -40,31 +42,28 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   }, [questions, currentQuestionID]);
 
   if (loading) {
-    return <h1>loading...</h1>;
+    return (
+      <CircularProgress
+        variant="determinate"
+        value={100}
+        className={styles.spinner}
+      />
+    );
   }
 
   return (
     <div className={styles.wrapper}>
-      Questions Page
-      {error && <ErrorMessage>Choose option</ErrorMessage>}
       {questions.length > 0 && (
-        <div>
-          <div className={styles.quizInfo}>
-            <span>Category: {currentQuestion.category}</span>
-            <span> Score: {score} </span>
-          </div>
-
-          <Question
-            score={score}
-            setScore={setScore}
-            questions={questions}
-            setQuestions={setQuestions}
-            currentQuestionID={currentQuestionID}
-            setCurrentQuestionID={setCurrentQuestionID}
-            options={options}
-            correct={currentQuestion.correct_answer}
-          />
-        </div>
+        <Question
+          score={score}
+          setScore={setScore}
+          questions={questions}
+          setQuestions={setQuestions}
+          currentQuestionID={currentQuestionID}
+          setCurrentQuestionID={setCurrentQuestionID}
+          options={options}
+          correct={currentQuestion.correct_answer}
+        />
       )}
     </div>
   );
