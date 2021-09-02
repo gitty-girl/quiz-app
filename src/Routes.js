@@ -6,11 +6,13 @@ import { ROUTES } from "./config/routes";
 
 import { Home, Result, Quiz, NotFound } from "./pages";
 
+import GuardedRoute from "./GuardedRoute";
+
 const Routes = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState();
 
   return (
     <div className="container">
@@ -24,18 +26,21 @@ const Routes = () => {
           />
         </Route>
 
-        <Route path={ROUTES.QUIZ}>
+        <GuardedRoute
+          path={ROUTES.QUIZ}
+          guard={!selectedCategory || !selectedDifficulty}
+        >
           <Quiz
             selectedCategory={selectedCategory}
             selectedDifficulty={selectedDifficulty}
             score={score}
             setScore={setScore}
           />
-        </Route>
+        </GuardedRoute>
 
-        <Route path={ROUTES.RESULT}>
+        <GuardedRoute path={ROUTES.RESULT} guard={score === undefined}>
           <Result score={score} setScore={setScore} />
-        </Route>
+        </GuardedRoute>
 
         <Route path={ROUTES.NOT_FOUND} component={NotFound} />
 

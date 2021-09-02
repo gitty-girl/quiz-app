@@ -44,7 +44,7 @@ const Question = ({
     setSelected(answer);
 
     if (answer === correct) {
-      setScore((prev) => prev + 1);
+      setScore((prev) => (prev || 0) + 1);
     }
   };
 
