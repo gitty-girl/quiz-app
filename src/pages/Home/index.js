@@ -30,6 +30,9 @@ const Home = ({
   const history = useHistory();
 
   useEffect(() => {
+    setSelectedCategory("");
+    setSelectedDifficulty("");
+
     getCategories()
       .then((data) => setCategories(data.trivia_categories))
       .catch((error) => setError(error.message))
