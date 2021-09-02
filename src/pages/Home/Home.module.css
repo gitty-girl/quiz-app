@@ -25,7 +25,3 @@
 .option {
   text-transform: capitalize !important;
 }
-
-.spinner {
-  z-index: 100;
-}

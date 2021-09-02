@@ -36,7 +36,7 @@ const Home = ({
     getCategories()
       .then((data) => setCategories(data.trivia_categories))
       .catch((error) => setError(error.message))
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   const handleSubmit = () => {
@@ -48,7 +48,7 @@ const Home = ({
   };
 
   if (loading) {
-    return <CircularProgress color="secondary" className="spinner" size={50} />;
+    return <CircularProgress color="secondary" size={50} />;
   }
 
   return (

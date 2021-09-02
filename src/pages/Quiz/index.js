@@ -35,7 +35,7 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
         setQuestions(data);
       })
       .catch((error) => setError(error.message))
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
   }, [selectedCategory, selectedDifficulty]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Quiz = ({ selectedCategory, selectedDifficulty, score, setScore }) => {
   }, [questions, currentQuestionID, currentQuestion]);
 
   if (loading) {
-    return <CircularProgress color="secondary" className="spinner" size={50} />;
+    return <CircularProgress color="secondary" size={50} />;
   }
 
   if (error) {
