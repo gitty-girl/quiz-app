@@ -12,7 +12,9 @@ const Routes = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
-  const [score, setScore] = useState();
+  const [score, setScore] = useState(0);
+
+  const guardRoute = !selectedCategory || !selectedDifficulty;
 
   return (
     <div className="container">
@@ -26,10 +28,7 @@ const Routes = () => {
           />
         </Route>
 
-        <GuardedRoute
-          path={ROUTES.QUIZ}
-          guard={!selectedCategory || !selectedDifficulty}
-        >
+        <GuardedRoute path={ROUTES.QUIZ} guard={guardRoute}>
           <Quiz
             selectedCategory={selectedCategory}
             selectedDifficulty={selectedDifficulty}
@@ -38,7 +37,7 @@ const Routes = () => {
           />
         </GuardedRoute>
 
-        <GuardedRoute path={ROUTES.RESULT} guard={score === undefined}>
+        <GuardedRoute path={ROUTES.RESULT} guard={guardRoute}>
           <Result score={score} setScore={setScore} />
         </GuardedRoute>
 
