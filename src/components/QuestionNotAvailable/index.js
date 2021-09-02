@@ -24,7 +24,7 @@ const QuestionNotAvailable = () => {
         disableElevation
         onClick={handleRetake}
       >
-        Back to settings
+        Try another category
       </Button>
     </div>
   );
